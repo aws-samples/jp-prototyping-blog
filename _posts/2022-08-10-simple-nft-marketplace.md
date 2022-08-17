@@ -62,7 +62,7 @@ image: /assets/imgs/2022-08-10-simple-nft-marketplace/web05.png
 
 ## おわりに
 
-以下の参考文献もご参照ください。
+Simple NFT Marketplace では秘密鍵を DynamoDB で管理しています。AWS KMS を利用すると、システムの運用者ですら秘密鍵を取り出すことができなくなり、よりセキュアです。方法は以下をご参照ください。
 
 - [How to sign Ethereum EIP-1559 transactions using AWS KMS](https://aws.amazon.com/jp/blogs/database/how-to-sign-ethereum-eip-1559-transactions-using-aws-kms/)
 
