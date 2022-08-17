@@ -1,11 +1,27 @@
-## My Project
+---
+title: "About"
+permalink: "/about/"
+layout: page
+---
 
-TODO: Fill this README out!
+AWS Prototyping チームが知見を共有するブログです。質問、コメント等は [Issue](https://github.com/aws-samples/jp-prototyping-blog/issues) へ投稿をお願いします。
 
-Be sure to:
+## Development
 
-* Change the title in this README
-* Edit your repository description on GitHub
+Ruby 環境が必要です。`bundler` がない場合は以下のコマンドでインストールしてください。
+```bash
+gem install bundler
+```
+
+依存 gem をインストールします。
+```bash
+bundle install
+```
+
+以下のコマンドで [`http://localhost:4000/jp-prototyping-blog/`](http://localhost:4000/jp-prototyping-blog/) に立ち上げます。
+```bash
+bundle exec jekyll serve
+```
 
 ## Security
 
@@ -14,4 +30,3 @@ See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more inform
 ## License
 
 This library is licensed under the MIT-0 License. See the LICENSE file.
-

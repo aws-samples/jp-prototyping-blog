@@ -1,0 +1,39 @@
+title: "AWS Prototyping ブログ"
+author: ""
+description: "AWS Prototyping チームが知見を共有するブログです。"
+permalink: /:title/
+lang: "ja"
+excerpt_separator: "<!--more-->"
+date_format: "%B %d, %Y"
+baseurl: "/jp-prototyping-blog"
+
+# Layout
+
+show_excerpts: true        # show article excerpts on the home page
+show_frame: true           # adds a gray frame to the site
+minimal: false             # use a dark header
+
+# Menu
+
+navigation:
+  - {file: "index.html"}
+  - {file: "README.md"}
+  - {file: "archive.html"}
+
+external:
+  - {title: Github, url: "https://github.com/aws-samples/jp-prototyping-blog"}
+  - {title: RSS, url: "/feed.xml"}
+
+plugins:
+ - jekyll-feed
+ - jekyll-paginate
+ - jekyll-seo-tag
+
+paginate: 5
+paginate_path: /page:num/
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      image: /assets/imgs/logo.png
