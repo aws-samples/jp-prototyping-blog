@@ -42,8 +42,7 @@ Jekyll で構成されたサイトの場合、次のように設定すれば本�
 
 ## マネージメントコンソールでの集計テスト
 
-Amazon CloudWatch RUM にはさまざまな機能があるのですが、ここではログの集計にフォーカスします。月次にそれぞれのページにどれくらいアクセスがあったか投稿する Bot を作成しましょう
-。まずは [Amazon CloudWatch Logs](https://console.aws.amazon.com/cloudwatch/home#logsV2:log-groups) を開いて、該当の Log group を探します。Log group は `/aws/vendedlogs/RUMService_<サイト名><ランダム文字列>` の形式になっていますので、検索ボックスから探してみてください。さまざまな Event が記録されていると思います。以下に一例を示します。(一部の項目は無効な値に置き換えています。)
+Amazon CloudWatch RUM にはさまざまな機能があるのですが、ここではログの集計にフォーカスします。月次にそれぞれのページにどれくらいアクセスがあったか投稿する Bot を作成しましょう。まずは [Amazon CloudWatch Logs](https://console.aws.amazon.com/cloudwatch/home#logsV2:log-groups) を開いて、該当の Log group を探します。Log group は `/aws/vendedlogs/RUMService_<サイト名><ランダム文字列>` の形式になっていますので、検索ボックスから探してみてください。さまざまな Event が記録されていると思います。以下に一例を示します。(一部の項目は無効な値に置き換えています。)
 
 ```json
 {
