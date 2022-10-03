@@ -28,6 +28,7 @@ plugins:
  - jekyll-feed
  - jekyll-paginate
  - jekyll-seo-tag
+ - jekyll-sitemap
 
 paginate: 5
 paginate_path: /page:num/
