@@ -67,7 +67,7 @@
     <header>
       <a href="{{ "/" | relative_url }}" class="title">
         <img src="{{ "/assets/imgs/logo.png" | relative_url }}">
-        <span>Blog</span>
+        <span>Prototyping Blog</span>
       </a>
       {% include menu.html menu=pages %}
     </header>
@@ -77,12 +77,15 @@
     {% if site.external %}
     <footer>
       <div class="footer-info">
-        <a href="{{ "/" | relative_url }}">
-          <img src="{{ "/assets/imgs/logo.png" | relative_url }}" class="footer-logo">
+        <a href="{{ "/" | relative_url }}" class="footer-logo">
+          <img src="{{ "/assets/imgs/logo.png" | relative_url }}">
+          <span>Prototyping Blog</span>
         </a>
-        © 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+        {% include menu.html menu=site.external external=true %}
       </div>
-      {% include menu.html menu=site.external %}
+      <span class="footer-copyright">
+        © 2022, Amazon Web Services, Inc. or its affiliates. All rights reserved.
+      </span>
     </footer>
     {% endif %}
   </body>

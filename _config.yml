@@ -23,6 +23,7 @@ navigation:
 external:
   - {title: Github, url: "https://github.com/aws-samples/jp-prototyping-blog"}
   - {title: RSS, url: "/feed.xml"}
+  - {title: Sitemap, url: "/sitemap.xml"}
 
 plugins:
  - jekyll-feed
