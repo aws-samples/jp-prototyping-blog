@@ -8,11 +8,10 @@
 
 .title > img
   height: 64px
-  margin-right: 0.5em
+  margin-right: 1.2em
 
 .title > span
-  margin-top: 4px
-  font-size: 33px
+  font-size: 1.8em
   font-weight: 400
 
 .more
@@ -150,13 +149,31 @@ a:hover .icon
     color: #a6e22e
 
 .footer-info
+  width: 100%
   display: flex
-  flex-direction: column
-  align-items: flex-start
+  flex-direction: row
+  align-items: center
+  justify-content: space-between
+  margin-bottom: 1.5em
 
 .footer-logo
-  height: 50px
-  margin-bottom: 1.4em
+  display: flex
+  flex-direction: row
+  align-items: center
+  justify-content: center
+  img
+    height: 50px
+    margin-right: 1.0em
+  span
+    font-size: 1.0em
+    font-weight: 400
+
+.footer-logo:hover
+  text-decoration: none
+
+.footer-copyright
+  width: 100%
+  text-align: center
 
 .meta
   display: flex
