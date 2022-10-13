@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkjp_prototyping_blog=self.webpackChunkjp_prototyping_blog||[]).push([[7143],{6061:p=>{p.exports=JSON.parse('{"label":"serverless","permalink":"/jp-prototyping-blog/blog/tags/serverless","allTagsPath":"/jp-prototyping-blog/blog/tags","count":1}')}}]);

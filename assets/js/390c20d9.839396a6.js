@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkjp_prototyping_blog=self.webpackChunkjp_prototyping_blog||[]).push([[7573],{9837:p=>{p.exports=JSON.parse('{"label":"nft","permalink":"/jp-prototyping-blog/blog/tags/nft","allTagsPath":"/jp-prototyping-blog/blog/tags","count":1}')}}]);
