@@ -76,7 +76,7 @@ const config = {
           label: 'Team',
         },
         {
-          href: 'https://github.com/facebook/docusaurus',
+          href: 'https://github.com/aws-samples/jp-prototyping-blog',
           label: 'GitHub',
           position: 'right',
         },
