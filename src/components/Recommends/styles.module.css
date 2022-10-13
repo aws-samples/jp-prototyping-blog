@@ -1,0 +1,39 @@
+.recommendsWithTitle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.recommendsTitle {
+    padding: 2rem 0;
+}
+
+.recommends {
+    display: flex;
+    align-items: center;
+    padding-bottom: 2rem;
+    width: 100%;
+}
+
+.link {
+    color: black;
+    margin-bottom: 1.5em;
+}
+
+.link:hover {
+    text-decoration: none;
+}
+
+.card {
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,.2);
+    background-color: white;
+    padding: 1.5em;
+    margin-bottom: 0.4em;
+}
+
+h3 {
+    margin: 0;
+}

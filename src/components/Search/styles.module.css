@@ -1,0 +1,7 @@
+.links {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-direction: row;
+    margin-bottom: 1.2em;
+}
