@@ -1,24 +1,24 @@
-.recommendsWithTitle {
+.recommends {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    margin-top: 6em;
 }
 
-.recommendsTitle {
-    padding: 2rem 0;
+.title {
+    margin-bottom: .5em;
 }
 
-.recommends {
+.articles {
     display: flex;
     align-items: center;
-    padding-bottom: 2rem;
     width: 100%;
+    margin-bottom: 2em;
 }
 
 .link {
     color: black;
-    margin-bottom: 1.5em;
 }
 
 .link:hover {
@@ -31,7 +31,6 @@
     box-shadow: 0 4px 15px rgba(0,0,0,.2);
     background-color: white;
     padding: 1.5em;
-    margin-bottom: 0.4em;
 }
 
 h3 {

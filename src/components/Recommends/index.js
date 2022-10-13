@@ -34,9 +34,9 @@ function Recommend({title, link}) {
 
 export default function Recommends() {
   return (
-    <div className={styles.recommendsWithTitle}>
-      <h1 className={styles.recommendsTitle}>オススメの記事</h1>
-      <section className={styles.recommends}>
+    <div className={styles.recommends}>
+      <h1 className={styles.title}>オススメの記事</h1>
+      <section className={styles.articles}>
         <div className="container">
           <div className="row">
             {RecommendList.map((props, idx) => (

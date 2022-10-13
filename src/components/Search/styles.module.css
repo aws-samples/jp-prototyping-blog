@@ -1,7 +1,34 @@
+.search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-bottom: 5em;
+    margin-top: 5em;
+}
+
+.title {
+    margin-bottom: .5em;
+}
+
 .links {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: center;
     flex-direction: row;
     margin-bottom: 1.2em;
+}
+
+.tag {
+    font-weight: bold;
+    background-color: #5882f7;
+    color: white;
+    padding: .2em .6em;
+    border-radius: .8em;
+    margin: 0 .2em;
+}
+
+.tag:hover {
+    text-decoration: none;
+    color: white;
 }
