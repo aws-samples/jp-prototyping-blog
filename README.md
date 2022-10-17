@@ -15,6 +15,13 @@ AWS JP Prototyping チームが日々の知見を蓄積するブログです。
 1. 画像はディレクトリ内に適当な命名で配置し、index.md から参照してください。
 1. 書き終わったら Pull Request を作成し、チームにレビューを依頼してください。
 
+## 手元で確認する方法
+
+```bash
+npm install
+npm start
+```
+
 ## Security
 
 See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.
