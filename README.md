@@ -1,5 +1,7 @@
 # AWS JP Prototyping Blog
 
+[![Deploy to GitHub Pages](https://github.com/aws-samples/jp-prototyping-blog/actions/workflows/deploy.yml/badge.svg)](https://github.com/aws-samples/jp-prototyping-blog/actions/workflows/deploy.yml)
+
 AWS JP Prototyping チームが日々の知見を蓄積するブログです。
 
 ## ご指摘・ご質問
