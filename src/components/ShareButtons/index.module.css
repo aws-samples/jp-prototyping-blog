@@ -1,0 +1,10 @@
+.shareButtons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.shareButton {
+    margin-right: .5em;
+}
