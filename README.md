@@ -1,5 +1,6 @@
 # AWS JP Prototyping Blog
 
+[![Website](https://img.shields.io/badge/AWS%20Prototyping%20Blog-Website-blue)](https://aws-samples.github.io/jp-prototyping-blog/)
 [![Deploy to GitHub Pages](https://github.com/aws-samples/jp-prototyping-blog/actions/workflows/deploy.yml/badge.svg)](https://github.com/aws-samples/jp-prototyping-blog/actions/workflows/deploy.yml)
 
 AWS JP Prototyping チームが日々の知見を蓄積するブログです。
