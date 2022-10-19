@@ -6,7 +6,9 @@ import ShareButtons from '../../../../components/ShareButtons';
 export default function InfoWrapper(props) {
   const location = useLocation();
 
-  if (location.pathname === '/jp-prototyping-blog/blog' || location.pathname.startsWith('/jp-prototyping-blog/blog/tags/')) {
+  if (location.pathname === '/jp-prototyping-blog/blog' ||
+      location.pathname === '/jp-prototyping-blog/blog/' ||
+      location.pathname.startsWith('/jp-prototyping-blog/blog/tags/')) {
     return (
       <>
         <Info {...props} />
