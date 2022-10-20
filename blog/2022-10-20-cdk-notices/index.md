@@ -11,6 +11,8 @@ authors: [tbrand]
 
 > CDK Notices are important messages regarding security vulnerabilities, regressions, and usage of unsupported versions. Relevant notices appear on every command by default.
 
+<!-- truncate -->
+
 `cdk deploy` などのコマンドを実行すると、このようなメッセージがでます。
 
 ```
