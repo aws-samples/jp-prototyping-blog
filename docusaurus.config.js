@@ -84,6 +84,12 @@ const config = {
       disableSwitch: true,
       respectPrefersColorScheme: false,
     },
+    metadata: [
+      {
+        name: 'google-site-verification',
+        content: 'QDt4NR8d-V1T7KHp94YVrifTFOIE9dm2b3cRz2rXMrU',
+      },
+    ],
     navbar: {
       title: 'Prototyping Blog',
       logo: {
