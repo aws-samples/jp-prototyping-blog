@@ -6,15 +6,15 @@ import styles from './styles.module.css';
 const RecommendList = [
   {
     title: '閉域網でサーバレスなアプリケーションを開発する',
-    link: '/jp-prototyping-blog/blog/closed-serverless-app',
+    link: '/blog/closed-serverless-app',
   },
   {
     title: 'AWS Samples の Simple NFT Marketplace を触ってみた',
-    link: '/jp-prototyping-blog/blog/simple-nft-marketplace',
+    link: '/blog/simple-nft-marketplace',
   },
   {
     title: 'AWS CDK で静的サイトをデプロイする (CloudFront + S3 + CF2)',
-    link: '/jp-prototyping-blog/blog/cdk-static-website',
+    link: '/blog/cdk-static-website',
   },
 ];
 
