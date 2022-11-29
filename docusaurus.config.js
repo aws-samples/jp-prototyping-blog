@@ -124,7 +124,7 @@ const config = {
   },
 
   scripts: [
-    isProd ? '/jp-prototyping-blog/js/rum-prod.js' : '/jp-prototyping-blog/js/rum-dev.js',
+    isProd ? '/js/rum-prod.js' : '/js/rum-dev.js',
   ],
 
   plugins: [],
