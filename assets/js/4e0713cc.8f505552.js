@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkjp_prototyping_blog=self.webpackChunkjp_prototyping_blog||[]).push([[1894],{8507:o=>{o.exports=JSON.parse('{"permalink":"/jp-prototyping-blog/blog/tags/s-3","page":1,"postsPerPage":10,"totalPages":1,"totalCount":1,"blogDescription":"Blog","blogTitle":"Blog"}')}}]);

@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkjp_prototyping_blog=self.webpackChunkjp_prototyping_blog||[]).push([[4531],{5598:o=>{o.exports=JSON.parse('{"label":"blockchain","permalink":"/jp-prototyping-blog/blog/tags/blockchain","allTagsPath":"/jp-prototyping-blog/blog/tags","count":1}')}}]);
