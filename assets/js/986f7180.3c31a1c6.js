@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkjp_prototyping_blog=self.webpackChunkjp_prototyping_blog||[]).push([[9848],{7446:t=>{t.exports=JSON.parse('{"label":"react","permalink":"/blog/tags/react","allTagsPath":"/blog/tags","count":1}')}}]);
