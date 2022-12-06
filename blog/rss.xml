@@ -9,6 +9,17 @@
         <generator>https://github.com/jpmonette/feed</generator>
         <language>ja</language>
         <item>
+            <title><![CDATA[新規 AWS アカウントで CodeBuild を利用する際の注意点]]></title>
+            <link>https://prototyping-blog.com/blog/codebuild-concurrency</link>
+            <guid>codebuild-concurrency</guid>
+            <pubDate>Mon, 05 Dec 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[AWS のサービスには、新規作成したばかりのアカウントにはデフォルトよりも低い上限を設けているものがあります。今回は、AWS CodeBuild に適用される事がある制限をご紹介します。]]></description>
+            <content:encoded><![CDATA[<p>AWS のサービスには、新規作成したばかりのアカウントにはデフォルトよりも低い上限を設けているものがあります。今回は、AWS CodeBuild に適用される事がある制限をご紹介します。</p><h2 class="anchor anchorWithStickyNavbar_LWe7" id="aws-codebuild-とは">AWS CodeBuild とは<a class="hash-link" href="#aws-codebuild-とは" title="見出しへの直接リンク">​</a></h2><p><a href="https://aws.amazon.com/codebuild/" target="_blank" rel="noopener noreferrer">AWS CodeBuild</a> は、フルマネージドなソフトウェア開発環境を提供する Code シリーズのサービスの1つで、ソフトウェアのビルドやテストのフェーズを担当しています。CodeBuild を使う事で、ビルドやテストを実行するためのサーバーの構築や運用から解放され、必要な時に必要なだけのリソースを持つインフラで自動的に実行できるようになります。CodeBuild の詳しい使い方について知りたい方は、<a href="https://youtu.be/Zzv1_ztf-B0" target="_blank" rel="noopener noreferrer">Black Belt Online Seminar</a> の動画を見て頂ければと思います。</p><h2 class="anchor anchorWithStickyNavbar_LWe7" id="aws-codebuild-のビルド同時実行数">AWS CodeBuild のビルド同時実行数<a class="hash-link" href="#aws-codebuild-のビルド同時実行数" title="見出しへの直接リンク">​</a></h2><p>AWS CodeBuild では、複数のビルドを並列で実行する事ができます。例えば、依存関係のないビルドを並列で実行する事でビルドにかかる時間を大きく短縮する事ができますが、同時実行できるビルドの数にはアカウント毎に上限が設けられています。</p><p><a href="https://docs.aws.amazon.com/codebuild/latest/userguide/limits.html" target="_blank" rel="noopener noreferrer">AWS CodeBuild のクォータ</a>のページを見ると、「ビルドの同時実行」のデフォルトの上限は「60」となっていますが、下の方に以下のような注釈が書かれています。(2022年12月現在)</p><blockquote><p>同時実行ビルドの最大数のクォータは、コンピューティングタイプによって異なります。
+一部のプラットフォームとコンピューティングタイプでは、デフォルトは 20 です。
+新しいアカウントの場合、クォータは最低 5 になります。</p></blockquote><p>コンピューティングタイプについては、<a href="https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html" target="_blank" rel="noopener noreferrer">ビルド環境のコンピューティングタイプ</a>のページをご確認ください。詳細は非公表となっていますが、一部のコンピューティングタイプには異なる上限が設けられています。現在の上限がいくつであるかは、実際に実行してみて「<code>Cannot have more than X builds in queue for the account</code>」といったエラーが出る事でしか確認できません。</p><p>そして、今回の本題である「新規 AWS アカウントに適用される制限」についても記載されており、「新しいアカウントの場合、クォータは最低 5 になります」とありますが、本当に新規作成したばかりのアカウントの場合、制限が 5 ではなく 1 になっている場合があります。そのため、その状態では並列ビルドの機能を使う事ができず、逐次実行させる必要があるという事になります。</p><p>無料枠の範囲内でも構いませんので、AWS サービスの利用実態をある程度積む事でこの制限は解除されるようですが、新規作成した AWS アカウントで CodeBuild の並列実行を行いたい場合はご注意ください。</p><h2 class="anchor anchorWithStickyNavbar_LWe7" id="まとめ">まとめ<a class="hash-link" href="#まとめ" title="見出しへの直接リンク">​</a></h2><ul><li>AWS CodeBuild のビルド同時実行数の上限は一律ではなく、条件によって異なる</li><li>新規作成したばかりの AWS アカウントでは、同時実行数の上限が 1 で並列ビルドができない場合がある</li></ul>]]></content:encoded>
+            <category>codebuild</category>
+        </item>
+        <item>
             <title><![CDATA[JenkinsのEC2プラグインは2つある]]></title>
             <link>https://prototyping-blog.com/blog/jenkins-ec2</link>
             <guid>jenkins-ec2</guid>
