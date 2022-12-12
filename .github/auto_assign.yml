@@ -23,5 +23,7 @@ numberOfReviewers: 1
 # numberOfAssignees: 2
 
 # A list of keywords to be skipped the process that add reviewers if pull requests include it
+# dna = Do NOT Assign
 skipKeywords:
   - wip
+  - dna

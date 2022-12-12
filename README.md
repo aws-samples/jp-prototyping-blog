@@ -25,6 +25,10 @@ npm install
 npm start
 ```
 
+## レビューの依頼
+
+デフォルトではランダムで reviewer がアサインされます。手動でアサインする場合は Pull Request のタイトルに "DNA" (= Do Not Assign) を含めて、手動でアサインしてください。
+
 ## Security
 
 See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.
