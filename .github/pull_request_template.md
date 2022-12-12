@@ -1,5 +1,7 @@
 # Pull Request
 
+- デフォルトではランダムで reviewer がアサインされます。手動でアサインする場合は Pull Request のタイトルに "DNA" = Do Not Assign を付与してください。(#30)
+
 ## 新規記事のチェックリスト
 
 新規記事の Pull Request でない場合はスキップして問題ありません。
