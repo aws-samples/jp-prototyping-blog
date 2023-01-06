@@ -274,7 +274,7 @@ Fluentd の[Filter Plugins](https://docs.fluentd.org/filter)を使うと、送�
   </match>
 ```
 
-なお最終的に KDS へ送信されるデータは下記となります。この例の場合`tag="example.log"`が送信先のシャード決定に利用されます。Consumer 側では`message`および`partition_key`の値からオブジェクトキーを特定します。
+なお最終的に KDS へ送信されるデータは下記となります。この例の場合`tag="example.log"`が送信先のシャード決定に利用されます。Consumer 側では`message`に含まれるオブジェクトキーを用いて本体データを取得できます。
 
 ```
 {
