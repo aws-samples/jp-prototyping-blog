@@ -5,7 +5,7 @@ tags: [fluentd, kinesis data streams, kinesis]
 authors: [statefb]
 ---
 
-[Kinesis Data Streams](https://aws.amazon.com/jp/kinesis/data-streams/) には、１レコードのサイズは 1MB 以下でなければならない制約があり、サイズの大きいデータを転送するには工夫が必要となります。また利用料金はストリームに読み書きされるデータ量に基づいて決定されるため、サイズが大きいと課金額も増えてしまいます。本記事では Publisher が Fluentd の場合において、上記課題を解決する方法についてご紹介します。メッセージをメタデータと本体に分割し、本体は S3 経由で Consumer に渡し、メタデータのみを Kinesis Data Streams へ送ることで実現します。
+[Kinesis Data Streams](https://aws.amazon.com/jp/kinesis/data-streams/) には、1 レコードのサイズは 1MB 以下でなければならない制約があり、サイズの大きいデータを転送するには工夫が必要となります。また利用料金はストリームに読み書きされるデータ量に基づいて決定されるため、サイズが大きいと課金額も増えてしまいます。本記事では Publisher が Fluentd の場合において、上記課題を解決する方法についてご紹介します。メッセージをメタデータと本体に分割し、本体は S3 経由で Consumer に渡し、メタデータのみを Kinesis Data Streams へ送ることで実現します。
 
 ![](./arch.png)
 
@@ -14,11 +14,34 @@ authors: [statefb]
 ## Kinesis Data Streams について
 
 Kinesis Data Streams (以降 KDS と呼称) は、フルマネージドのサーバレスストリーミングサービスです。シンプルな従量制課金を採用しており、シャードの稼働時間に応じて料金は計算されます。シャードは基本的なスループットの単位であり、スループット要件に応じて必要なシャード数を決定します。なおオンデマンドモードを利用した場合、読み書きのデータ量に応じて自動的にシャード数のスケールが行われます。詳細は[Amazon Kinesis Data Streams の料金](https://aws.amazon.com/jp/kinesis/data-streams/pricing/)をご覧ください。  
-また KDS では１レコードのサイズが 1MB 以下である必要があります。詳細は[Quotas and Limits](https://docs.aws.amazon.com/streams/latest/dev/service-sizes-and-limits.html)をご確認ください。
+また KDS では 1 レコードのサイズが 1MB 以下である必要があります。詳細は[Quotas and Limits](https://docs.aws.amazon.com/streams/latest/dev/service-sizes-and-limits.html)をご確認ください。
 
 ## 方針
 
-各レコードにユニークな ID を割り当て、KDS では ID のみを、S3 バケットへはレコードの本体をそれぞれ送信します。バケットのオブジェクトキーに ID を含ませておけば、Consumer 側で ID を元にバケットから本体のデータを取得し処理することができます。これにより KDS で取り扱うレコードのサイズを削減することが可能です。以降、Fluentd を用いた場合について具体的に解説します。
+各レコードにユニークな ID を割り当て、KDS では ID のみを、S3 バケットへはレコードの本体をそれぞれ送信します。バケットのオブジェクトキーに ID を含ませておけば、Consumer 側で ID を元にバケットから本体のデータを取得し処理することができます。これにより KDS で取り扱うレコードのサイズを削減することが可能です。本記事では、Fluentd を用いた場合について具体的に解説します。
+
+## 想定するレコード例
+
+サイズの大きなレコードの例を示します。
+
+```record.json
+[
+    {
+        "metrics_name": "metrics1",
+        "metrics_value": 24.1,
+        ...
+    },
+    {
+        "metrics_name": "metrics2",
+        "metrics_value": 312.56,
+        ...
+    },
+    ...以降続く
+]
+
+```
+
+上記の配列を「1 レコード」として取り扱うことを想定しています。この例の場合、各`metrics`を別々のレコードとして取り扱えばサイズを 1MB に抑えることも可能でしょう。しかし Fluentd の入力側の都合や (技術的な課題や組織的な事情)、個々の`metrics`間に依存関係があるため Consumer 側ではまとめて処理した方が見通しが良い等の事情により、分割することが困難または妥当でないケースがあります。また上記の配列単位で順序性が担保されれば良い場合、KDS にすべて送信すると前述のコスト体系により予算面で厳しいケースも考えれます。このような課題を前述の方針により解決を図ります。
 
 ## Fluentd のバッファリング
 
@@ -104,7 +127,7 @@ log.debug "out_s3: write chunk #{dump_unique_id_hex(chunk.unique_id)} with metad
 
 ## Fluentd のコンフィギュレーション
 
-以上の内容を踏まえ、S3 へ本体を転送し、KDS へメタデータを送るコンフィギュレーションを作成します。
+以上の内容を踏まえ、S3 へ本体を転送し、 KDS へメタデータを送るコンフィギュレーション例を作成してみます。
 
 ### ログレベルの設定
 
@@ -123,10 +146,10 @@ S3 Output プラグインは 前述のチャンク情報を含むログを `debu
 ### S3
 
 ここでは後に[Amazon Athena](https://aws.amazon.com/jp/athena/)を用い効率的にクエリできるよう、Hive 形式 (s3://year=yyyy/month=mm/day=dd) かつ gzip に圧縮し出力するものとします。  
-下記のように設定すると、S3 バケットへは`s3://example_bucket/hello/year=2023/month=01/day=05/{チャンクID}.gzip`のような形式で保存されます。
+下記のように設定すると、S3 バケットへは`s3://example_bucket/log/year=2023/month=01/day=05/{チャンクID}.gzip`のような形式で保存されます。
 
 ```
-<match example.hello>
+<match example.log>
     @type s3
 
     s3_bucket example_bucket
@@ -145,9 +168,41 @@ S3 Output プラグインは 前述のチャンク情報を含むログを `debu
 </match>
 ```
 
-### フィルタリング
+S3 に保存されるデータ例を下記に示します。上記の設定の場合 10 秒の間に到達した[想定するレコード](#想定するレコード例)を json フォーマットで並べたものになります。
 
-Fluentd の[Filter Plugins](https://docs.fluentd.org/filter)を使うと、送信したい内容を加工することができます。  
+```
+{
+    [
+        {
+            "metrics_name": "metrics1",
+            "metrics_value": 24.1
+        },
+        {
+            "metrics_name": "metrics2",
+            "metrics_value": 312.56
+        },
+        ...
+    ]
+}
+{
+    [
+        {
+            "metrics_name": "metrics1",
+            "metrics_value": 28.1
+        },
+        {
+            "metrics_name": "metrics2",
+            "metrics_value": 356.13
+        },
+        ...
+    ]
+}
+...
+```
+
+### Fluentd 自身のログのフィルタリング
+
+Fluentd の[Filter Plugins](https://docs.fluentd.org/filter)を使うと、送信したい内容を抽出・加工することができます。  
 まず前述した S3 Output プラグインが S3 転送した時のログを下記の設定により抽出します。
 
 ```
@@ -160,7 +215,17 @@ Fluentd の[Filter Plugins](https://docs.fluentd.org/filter)を使うと、送�
   </filter>
 ```
 
-続いて元のタグ (ここでは `example.hello`) を抽出し KDS のパーティションキーとして利用します。
+これにより例えば下記のようなログのみが抽出できます。
+
+```.json
+{
+    "time": "2023-01-06",
+    "level": "debug",
+    "message": "out_s3: write chunk 5f18e855a51912add1e8b26328a62d3d with metadata #<struct Fluent::Plugin::Buffer::Metadata timekey=1672969300, tag=\"example.log\", variables=nil> to s3://example_bucket/log/year=2023/month=01/day=06/5f18e855a51912add1e8b26328a62d3d.gz",
+}
+```
+
+続いて上記の抽出したログに対し、元のタグ (ここでは `example.log`) を含む部分を正規表現により取得し、後述する KDS のパーティションキーとして利用するため追加します。
 
 ```
   <filter fluent.debug>
@@ -168,12 +233,23 @@ Fluentd の[Filter Plugins](https://docs.fluentd.org/filter)を使うと、送�
     enable_ruby
     <record>
       # 元のタグを正規表現で抽出しkinesisのpartition keyに利用
-      partition_key ${record["message"].match(/tag=.+,/)[0]}
+      partition_key ${record["message"].match(/tag=.+,/)[0].slice(0..-2)}
     </record>
   </filter>
 ```
 
-`fluent.debug`タグのレコードは KDS へ送信したくないため下記により除外します。
+下記のように`parition_key`が新たに追加されます。
+
+```
+{
+    "time": "2023-01-06",
+    "level": "debug",
+    "message": ...
+    "partition_key": "tag=\"example.log\""
+}
+```
+
+`fluent.debug`タグのレコードを KDS へ送信しないようにするため下記により除外します。
 
 ```
   <filter fluent.debug>
@@ -198,6 +274,17 @@ Fluentd の[Filter Plugins](https://docs.fluentd.org/filter)を使うと、送�
   </match>
 ```
 
+なお最終的に KDS へ送信されるデータは下記となります。この例の場合`tag="example.log"`が送信先のシャード決定に利用されます。Consumer 側では`message`および`partition_key`の値からオブジェクトキーを特定します。
+
+```
+{
+    "time": "2023-01-06",
+    "level": "debug",
+    "message": "out_s3: write chunk 5f18e855a51912add1e8b26328a62d3d with metadata #<struct Fluent::Plugin::Buffer::Metadata timekey=1672969300, tag=\"example.log\", variables=nil> to s3://example_bucket/log/year=2023/month=01/day=06/5f18e855a51912add1e8b26328a62d3d.gz",
+    "partition_key": "tag=\"example.log\""
+}
+```
+
 以上の内容を一つにまとめたものが下記となります。
 
 ```fluent.conf
@@ -209,7 +296,7 @@ Fluentd の[Filter Plugins](https://docs.fluentd.org/filter)を使うと、送�
   </log>
 </system>
 
-<match example.hello>
+<match example.log>
     @type s3
 
     s3_bucket example_bucket
