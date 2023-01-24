@@ -1,7 +1,7 @@
 ---
-title: "Congito Identity Pools の Unauthenticated Role で Amazon Kendra にアクセスしたら AccessDeniedException だった話"
+title: "Cognito Identity Pools の Unauthenticated Role で Amazon Kendra にアクセスしたら AccessDeniedException だった話"
 slug: identity-pool-unauth
-tags: [congito, kendra]
+tags: [cognito, kendra]
 authors: [tbrand]
 ---
 
@@ -42,7 +42,7 @@ An error occurred (AccessDeniedException) when calling the Query operation: User
 この表によると、Amazon Lex や Amazon Transcribe などは呼び出し可能ですが、確かに Amazon Kendra はリストにありません。
 最終的に、Amazon Kendra を呼び出すことが可能な API Endpoint を作成することで、これを回避しました。
 
-ちなみに、ゲストユーザーではなく、認証されたユーザーであれば呼び出し可能です。例えば Cognito で認証した場合、ID Token を取得して以下のように設定してください。(`<IDENTITY_POOL_ID>`、`<REGION>`、`<CONGITO_USER_POOL_ID>` と `<ID Token>` は適切な値に書き換えが必要) ([参考](https://docs.aws.amazon.com/ja_jp/sdk-for-javascript/v3/developer-guide/loading-browser-credentials-cognito.html))
+ちなみに、ゲストユーザーではなく、認証されたユーザーであれば呼び出し可能です。例えば Cognito で認証した場合、ID Token を取得して以下のように設定してください。(`<IDENTITY_POOL_ID>`、`<REGION>`、`<COGNITO_USER_POOL_ID>` と `<ID Token>` は適切な値に書き換えが必要) ([参考](https://docs.aws.amazon.com/ja_jp/sdk-for-javascript/v3/developer-guide/loading-browser-credentials-cognito.html))
 
 ```javascript
 import { fromCognitoIdentityPool } from "@aws-sdk/credential-providers";
