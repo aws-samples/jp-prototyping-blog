@@ -48,7 +48,7 @@ aws ssm start-session \
 
 あとは手元の端末のVNCクライアント (MacならScreen sharingアプリがデフォルトで利用可能です) から、`localhost:5900` に接続すればOKです。
 
-![ard](ard.png)
+![ard](ard.jpg)
 
 画面解像度を変更したい場合は、こちらに手順があります: [Modify macOS screen resolution on Mac instances](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-mac-instances.html#mac-screen-resolution)。コマンド4つくらいで済みます。
 
