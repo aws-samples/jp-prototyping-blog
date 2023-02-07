@@ -2,7 +2,7 @@
 title: 'Amazon Lex, Amazon Kendra のサンプルプロジェクト開発で集めた Tips'
 slug: lex-kendra-dev
 tags: [lex, kendra, cdk]
-authors: [taichirs]
+authors: [tbrand]
 ---
 
 弊社 Prototyping チームと ML Specialist 合同で作成した [simple-lex-kendra-jp](https://github.com/aws-samples/simple-lex-kendra-jp) というサンプルプロジェクト開発中に集めた Tips を紹介いたします。包括的な内容ではなく、散文的な内容になることをご了承ください。また、Amazon Lex、Amazon Kendra に直接関係のない Tips もあります。
@@ -11,9 +11,9 @@ authors: [taichirs]
 
 ## simple-lex-kendra-jp について
 
-AWS では "言語" についての ML サービスをいくつか展開していますが、Amazon Lex と Amazon Kendra もそれに属します。Amazon Lex は会話型 AI を使用してチャットボットと音声ボットを構築するサービスで、Amazon Kendra はさまざまなデータソースに存在するドキュメントに対して機械学習を活用してインテリジェントな検索を提供するサービスです。また、Amazon Lex と Amazon Kendra を統合することで、チャットボットから検索が可能になります。
+AWS では "言語" に関する ML サービスをいくつか展開していますが、Amazon Lex と Amazon Kendra もそれに属します。Amazon Lex は会話型 AI を使用してチャットボットと音声ボットを構築するサービスで、Amazon Kendra はさまざまなデータソースに存在するドキュメントに対して機械学習を活用してインテリジェントな検索を提供するサービスです。また、Amazon Lex と Amazon Kendra を統合することで、チャットボットから検索が可能になります。
 
-[simple-lex-kendra-jp](https://github.com/aws-samples/simple-lex-kendra-jp) は日本のユーザーに最適化した Amazon Lex と Amazon Kendra のサンプルプロジェクトです。ドキュメントが日本語であることももちろんのこと、内容も日本のユーザーに向けて最適化されています。このサンプルプロジェクトでは、架空の会社の社内検索システムと社内サポートのチャットボット対応を構築します。
+[simple-lex-kendra-jp](https://github.com/aws-samples/simple-lex-kendra-jp) は日本のユーザーに最適化した Amazon Lex と Amazon Kendra のサンプルプロジェクトです。ドキュメントが日本語であることはもちろんのこと、内容も日本のユーザーに向けて最適化されています。このサンプルプロジェクトでは、架空の会社の社内検索システムと社内サポートのチャットボット対応を構築します。
 
 ## Tips
 
@@ -67,13 +67,15 @@ npm run start -w web-kendra
 
 Amazon Lex では、複数の Bot のバージョンを作成し、Alias を特定のバージョンに向けることで Bot を利用します。そのため、Bot、Bot Version、Bot Alias の 3 つを作成する必要があります。開発中、あるいは、本番運用フェーズにおいても、常に最新の Bot を指す Bot Version が必要になるケースがほとんどだと思います。その際、ただ CDK で Bot Version を作成しただけでは、Bot の内容が変更されたとしても、Bot Version 自体には変更が入っていないため、最新に向いていると思っている Bot Version が古い Bot を示す場合があります。
 
-simple-lex-kendra-jp では、このようなことが起こらないように、デプロイするたびに作成しなおす Bot Version を作成しています。(常に最新に向いています。) 具体的にはリソースの Logical ID に自動でインクリメントされる数字を含ませることで、毎回作成しなおすということを行っています。自動でインクリメントする方法は、CloudFormation の Output として現在の Bot Version Number を出力し、次回デプロイ時にその数値 + 1 のバージョンを利用する、ということを行っています。ちなみに、このような用途であれば、単にランダムな Hex 値を Logical ID に入れるという実装でも良いと思います。今回は、特定の Bot Version Number を本番で利用するものとして Fix する、という用途も見据えて数値をインクリメントする実装にしました。(そのような実装はサンプルコードには含まれていません。)
+simple-lex-kendra-jp では、このようなことが起こらないように、デプロイするたびに作成しなおす Bot Version を作成しています。(常に最新に向いています。) 具体的にはリソースの Logical ID に自動でインクリメントされる数字を含ませることで、毎回作成しなおすということを行っています。自動でインクリメントする方法としては、CloudFormation の Output として現在の Bot Version Number を出力し、次回デプロイ時にその数値 + 1 のバージョンを利用する、ということを行っています。ちなみに、このような用途であれば、単にランダムな Hex 値を Logical ID に入れるという実装でも良いと思います。今回は、特定の Bot Version Number を本番で利用するものとして Fix するという用途も見据えて数値をインクリメントする実装にしました。(そのような実装はサンプルコードには含まれていません。)
 
-<TODO: コードへのリンク>
+- [前回デプロイ時の Bot Version Number を取得](https://github.com/aws-samples/simple-lex-kendra-jp/blob/main/cdk/bin/simple-lex-kendra-jp.ts#L8-L24)
+- [バージョンのインクリメント](https://github.com/aws-samples/simple-lex-kendra-jp/blob/main/cdk/lib/simple-lexv2-stack.ts#L191)
+- [現在の Bot Version Number を出力](https://github.com/aws-samples/simple-lex-kendra-jp/blob/main/cdk/lib/simple-lexv2-stack.ts#L304-L306)
 
 ### Amazon Lex の nluConfidenceThreshold は高めに設定した方が良い
 
-Amazon Lex では、発話に対してどの Intent を起動するのかの閾値を設定します。CloudFormation 的には nluConfidenceThreshold というプロパティで、Management Console 的には Confidence score threshold というプロパティになります。この閾値は 0.0 ~ 1.0 で設定します。閾値を高くすると、あらかじめ設定した発話パターンに近くないと Intent が起動しないということになります。低くすると、ざっくりとしたものでも Intent で拾えるようになる一方、不正確な Intent がキックされる可能性も高くなります。
+Amazon Lex では、発話に対してどの Intent を起動するのかの閾値を 0.0 ~ 1.0 で設定します。CloudFormation 的には nluConfidenceThreshold というプロパティで、AWS Management Console 的には Confidence score threshold というプロパティになります。閾値を高くすると、あらかじめ設定した発話パターンに近くないと Intent が起動しないということになります。低くすると、ざっくりとしたものでも Intent で拾えるようになる一方、不正確な Intent がキックされる可能性も高くなります。
 
 この値は運用中にチューニングしていくことにはなるのですが、基本的には高めに設定しておくことをお勧めします。理由としては、それぞれの Cons として以下の 2 点を書きましたが
 
@@ -82,10 +84,14 @@ Amazon Lex では、発話に対してどの Intent を起動するのかの閾�
 
 このうち、高い場合の Cons については運用でカバーが可能なためです。具体的には、Amazon Lex の Analytics 機能から Utterances statistics を開き、Missed (対象の Intent がわからなかった発話) を収集して、Slot をチューニングしたり、新しく Intent を追加したりすることが可能なためです。一方、低い場合は、キックされた Intent が不正確だったかどうかを調査するのが、かなり面倒になります。よって、最初に高い数値を設定しおき、徐々に発話パターンを充填させていくという運用をお勧めします。
 
+なお、発話に関しては [API でも取得できる](https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListAggregatedUtterances.html) ため、定期的に運用チームにレポートするといった運用にしても良いかもしれませんね。
+
 ### Amazon Kendra の Custom Data Source の Attribute には `_source_uri` をつけると良い
 
 基本的には [こちら](https://docs.aws.amazon.com/kendra/latest/dg/data-source-custom.html) の公式ドキュメントに書かれている通りなのですが、Custom Data Source には `_source_uri` の Attribute もつけた方が良いと考えます。(必須な Attributes は `_data_source_id` と `_data_source_sync_job_execution_id` のみです。) 理由としては、他のデータソース (S3 Bucket など) ではソースの URI が設定されていることがほとんどであるため、UI を実装する上で同様に扱えた方が良いと考えるためです。
 
 ## まとめ
 
-IdentityProvider と tech knowledge について
+この記事では [simple-lex-kendra-jp](https://github.com/aws-samples/simple-lex-kendra-jp) 開発中に得た Tips をまとめてみました。これら以外にもこちらのサンプルプロジェクトから得られた知見を以下にまとめています。
+- [Cognito Identity Pools の Unauthenticated Role で Amazon Kendra にアクセスしたら AccessDeniedException だった話](https://prototyping-blog.com/blog/identity-pool-unauth)
+- [Tech Knowledge (Amazon Lex v2 と Amazon Kendra についての知見をまとめたもの)](https://github.com/aws-samples/simple-lex-kendra-jp/blob/main/docs/05_TECH_KNOWLEDGE.md)
