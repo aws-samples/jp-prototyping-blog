@@ -1,6 +1,7 @@
 # Pull Request
 
 - デフォルトではランダムで reviewer がアサインされます。手動でアサインする場合は Pull Request のタイトルに "DNA" = Do Not Assign を付与してください。(#30)
+- **Merge は reviewer が LGTM を出したタイミングで行ってください！**
 
 ## 新規記事のチェックリスト
 
