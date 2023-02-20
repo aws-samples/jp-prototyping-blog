@@ -5,11 +5,16 @@ tags: [cdk, ec2, unity]
 authors: [ymhiroki]
 ---
 
-## はじめに
-
 本記事では AWS CDK を使い、指定したネットワークインターフェイス (ENI) をプライマリネットワークインターフェイス (primary ENI) としてアタッチし、MAC アドレスと IP アドレスを固定した EC2 インスタンスを作成する方法について紹介します。
-primary ENI を指定して起動することで、IP アドレスや MAC アドレスをインスタンス間で引き継ぐことが可能になります。
-ソフトウェアやアーキテクチャの仕様上、MAC アドレスや IP アドレスを固定する必要がある場合などにご活用ください。
+
+MAC アドレスや IP アドレスを固定する必要がある場合などに本記事で紹介する方法をご活用ください。
+
+<!-- truncate -->
+
+## EC2 インスタンスと ENI について
+
+primary ENI を指定して起動することで、IP アドレスや MAC アドレスを EC2 インスタンス間で引き継ぐことが可能になります。
+EC2 インスタンスでは AWS CLI のコマンドを利用することで ENI を追加 (アタッチ)・削除 (デタッチ) できますが、primary ENI に限っては変更できないことが明記されています ([参考](https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/using-eni.html))。
 
 マネジメントコンソール経由で ENI を指定して起動する方法については他のウェブサイト等でも紹介されていますが、AWS CDK でも実現可能であることを知っていただければと思います。
 
@@ -25,12 +30,6 @@ $ cdk --version
 2.63.0 (build 7f4e35e)
 ```
 
-## EC2 インスタンスと ENI について
-
-ENI を指定することで、MAC アドレスや IP アドレスを引き継いで EC2 インスタンスを起動できるようになります。
-EC2 インスタンスでは AWS CLI のコマンドを利用することで ENI を追加 (アタッチ)・削除 (デタッチ) できます。
-しかし、primary ENI に限っては変更できないことが明記されています ([参考](https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/using-eni.html))。
-
 ## ENI を AWS CDK で作成する
 
 まず、EC2 インスタンスにアタッチする ENI を AWS CDK で作成します。
@@ -40,7 +39,7 @@ EC2 インスタンスでは AWS CLI のコマンドを利用することで ENI
 そこで今回はより CloudFormation に近い L1 コンストラクトの [`ec2.CfnNetworkInterface`](https://docs.aws.amazon.com/cdk/api/v1/docs/@aws-cdk_aws-ec2.CfnNetworkInterface.html) を使って ENI を作成します。
 ENI が誤って削除されてしまうことを防止したい場合、必要に応じて削除ポリシーに `Retain` を指定します。
 
-import 部分と CDK のコードはそれぞれ以下のようになります。(一部抜粋、以下同様)
+CDK のコードはそれぞれ以下のようになります。(一部抜粋、以下同様)
 
 ```typescript
 import * as cdk from 'aws-cdk-lib';
@@ -107,7 +106,7 @@ new ec2.CfnInstance(this, 'Instance', {
 ## Unity Build Server での応用例
 
 MAC アドレスの固定が求められる場面の例として、Unity Build Server を AWS 上に構築するケースが挙げられます。
-aws-samples に[サンプルコード](https://github.com/aws-samples/unity-build-server-with-aws-cdk) を公開していますので、ご利用のソフトウェアのライセンス条項等をご確認の上、参考にしてご活用ください。
+aws-samples に[サンプルコード](https://github.com/aws-samples/unity-build-server-with-aws-cdk) を公開していますので、ご利用のソフトウェアのライセンス条項等をご確認の上、ご活用ください。
 
 ## おわりに
 
