@@ -60,4 +60,6 @@ Macインスタンスでも、メインストレージとしてEBSが利用さ�
 ## まとめ
 以上、EC2 Macインスタンスを使ってみて気づいたことを紹介しました。
 
-プロトタイピングチームでは、EC2 Macを使ってJenkinsのUnityビルドパイプラインを構築するCDKテンプレートを公開しています。こちらもぜひご参考にしてください。
+プロトタイピングチームでは、EC2 Macを使ってJenkinsのUnityビルドパイプラインを構築するCDKテンプレートを公開しています: [Unity Build Pipeline with Jenkins and EC2 Mac](https://github.com/aws-samples/jenkins-unity-build-on-aws)。
+EC2インスタンスをCDKで構築するコード例は[こちら](https://github.com/aws-samples/jenkins-unity-build-on-aws/blob/main/lib/construct/jenkins/agent-mac.ts)です。
+ご参考にしていただければ幸いです。
