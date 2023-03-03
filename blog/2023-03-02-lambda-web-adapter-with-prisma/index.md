@@ -1,5 +1,5 @@
 ---
-title: 'Lambda Web Adapter で Prisma を利用する際の注意点'
+title: 'Lambda Web Adapter と Prisma を利用する際の注意点'
 slug: lambda-web-adapter-with-prisma
 tags: [lambda, prisma, typescript]
 authors: [wadabee]
@@ -30,7 +30,7 @@ Lambda には、コンテナイメージで実装した以下の Web アプリ�
   * `RUN apt-get -y install openssl`
 * Web フレームワーク：[Express](https://expressjs.com/)
 
-## Lambda Web Adapter で Prisma を利用する際の注意点
+## Lambda Web Adapter と Prisma を利用する際の注意点
 ### Lambda 関数のアーキテクチャ不一致による実行エラー
 こちらは、Prisma とは直接関係のないものとなりますが、ハマりやすいポイントのためご紹介します。  
 
