@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkjp_prototyping_blog=self.webpackChunkjp_prototyping_blog||[]).push([[4233],{7263:a=>{a.exports=JSON.parse('{"label":"lambda","permalink":"/blog/tags/lambda","allTagsPath":"/blog/tags","count":2}')}}]);
