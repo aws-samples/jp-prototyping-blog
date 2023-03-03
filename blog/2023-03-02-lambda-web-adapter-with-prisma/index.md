@@ -45,7 +45,7 @@ CodeBuild には[ビルド用環境のイメージが用意](https://docs.aws.am
 * `x86_64`の場合は、`aws/codebuild/amazonlinux2-x86_64-standard:4.0` または、`aws/codebuild/standard:6.0`
 
 `arm64` でビルドを行いたい場合は、以下について注意が必要です。  
-`aws/codebuild/amazonlinux2-aarch64-standard:2.0` プリインストールされている Node.js のバージョンが `10.24.1` と非常に古いものになっています（[参考](https://github.com/aws/aws-codebuild-docker-images/blob/master/al2/aarch64/standard/2.0/Dockerfile#L233)）。  
+`aws/codebuild/amazonlinux2-aarch64-standard:2.0` にプリインストールされている Node.js のバージョンは `10.24.1` と非常に古いものになっています（[参考](https://github.com/aws/aws-codebuild-docker-images/blob/master/al2/aarch64/standard/2.0/Dockerfile#L233)）。  
 これでは、2023年03月 現在よく使われている v16, v18 を利用して開発を行なっていた場合に、CodeBuild 内で  `npm ci` コマンドの実行に失敗してしまいます（注意：[v16 は 2023-09-11 EOL 予定](https://github.com/nodejs/Release)）。  
 ※ v15 以上の Node.js は lockfileVersion が 3 であるため、pakage-lock.json の互換性がなくなり、`npm ci` コマンドが失敗します（[参考](https://docs.npmjs.com/cli/v9/configuring-npm/package-lock-json#file-format)）。  
 そのため、Node.js をアップグレードしたカスタムイメージを利用するか、[buildspec](https://docs.aws.amazon.com/ja_jp/codebuild/latest/userguide/build-spec-ref.html) にて Node.js のアップグレードを行う必要があります。
@@ -98,7 +98,7 @@ RDS Proxy を利用している場合、多重化によって予期せぬ動作�
 
 引用：https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/rds-proxy-managing.html#rds-proxy-pinning
 
-Prisma は Prepared Statement を利用して SQL を発行する使用であるため、RDS Proxy を利用すると必ずピン留めが発生します。  
+Prisma は Prepared Statement を利用して SQL を発行する仕様であるため、RDS Proxy を利用すると必ずピン留めが発生します。  
 >Because Prisma uses prepared statements for all queries, you won't see any benefit when using RDS Proxy with Prisma.
 
 引用：https://www.prisma.io/docs/guides/deployment/deployment-guides/caveats-when-deploying-to-aws-platforms#aws-rds-proxy
