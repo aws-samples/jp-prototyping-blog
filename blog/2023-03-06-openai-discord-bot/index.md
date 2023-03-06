@@ -12,7 +12,7 @@ authors: [kudtomoy]
 ![アーキテクチャ](architecture.png)
 
 AWS Fargate で Docker コンテナを動かすシンプルな構成です。API Key 等の保存に Pamameter Store を使っています。
-
+ソースコードは [GitHub](https://github.com/kudtomoy/cdk-openai-discord-bot) にあります。
 
 ## 必要な準備
 - Docker と Node.js (LTSを推奨) と AWS CLI がインストールされていること
