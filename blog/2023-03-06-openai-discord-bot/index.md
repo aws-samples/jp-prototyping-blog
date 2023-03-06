@@ -1,7 +1,7 @@
 ---
 title: 'OpenAI API を使って Discord Bot を作る'
 slug: openai-discord-bot
-tags: [openai, dicsord, cdk]
+tags: [openai, discord, cdk]
 authors: [kudtomoy]
 ---
 
