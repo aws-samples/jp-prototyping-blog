@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkjp_prototyping_blog=self.webpackChunkjp_prototyping_blog||[]).push([[5699],{2471:p=>{p.exports=JSON.parse('{"label":"openai","permalink":"/blog/tags/openai","allTagsPath":"/blog/tags","count":1}')}}]);
