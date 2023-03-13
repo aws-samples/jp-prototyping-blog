@@ -127,7 +127,9 @@ const config = {
     isProd ? '/js/rum-prod.js' : '/js/rum-dev.js',
   ],
 
-  plugins: [],
+  plugins: [
+    ['./plugins/get-recent-posts', { n: 10 }],
+  ],
 };
 
 module.exports = config;
