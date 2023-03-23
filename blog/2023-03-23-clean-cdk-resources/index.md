@@ -1,29 +1,29 @@
 ---
-title: 'cdk destory しても残ってしまうリソースへの対処法'
+title: 'cdk destroy しても残ってしまうリソースへの対処法'
 slug: clean-cdk-resources
 tags: [cdk]
 authors: [kudtomoy]
 ---
 
-CDK で deploy や destroy を繰り返していると、不要なリソースが削除されずに残ってしまうことがあります。この記事ではそれらの `cdk destory` しても残ってしまうリソースへの対処法を説明します。
+CDK で deploy や destroy を繰り返していると、不要なリソースが削除されずに残ってしまうことがあります。この記事ではそれらの `cdk destroy` しても残ってしまうリソースへの対処法を説明します。
 
 <!-- truncate -->
 ## 全てのリソースの RemovalPolicy を DESTROY に設定する
-リソースの `RemovalPolicy` が `RETAIN` になっていると、`cdk destory` してもそのリソースは残ります。
+リソースの `RemovalPolicy` が `RETAIN` になっていると、`cdk destroy` してもそのリソースは残ります。
 開発環境などで全てのリソースに `RemovalPolicy.DESTROY` を付けたい場合は [Aspects](https://docs.aws.amazon.com/cdk/v2/guide/aspects.html) を使うと簡単です。
 以下のように使います。
 
 ```
-export class DeletionPolicySetter implements cdk.IAspect {
+class DeletionPolicySetter implements cdk.IAspect {
     constructor(private readonly policy: cdk.RemovalPolicy) {}
     visit(node: IConstruct): void {
         if (node instanceof cdk.CfnResource) {
-            node.applyRemovalPolicy(this.policy);
+            node.applyRemovalPolicy(this.policy)
         }
     }
 }
 
-cdk.Aspects.of(myStack).add(new DeletionPolicySetter(cdk.RemovalPolicy.DESTROY));
+cdk.Aspects.of(myStack).add(new DeletionPolicySetter(cdk.RemovalPolicy.DESTROY))
 ```
 
 ## 中身があると消せないリソースは、中身も消すように設定する
@@ -35,7 +35,7 @@ x:xx:xx | DELETE_FAILED        | AWS::S3::Bucket       | Bucketxxxx
 The bucket you tried to delete is not empty (Service: Amazon S3; Status Code: 409; Error Code: BucketNotEmpty; Request ID: ...)
 ```
 
-S3 Bucket の場合は `autoDeleteObjects` を設定することで `cdk destory` 時にオブジェクトを含めて削除してくれます。
+S3 Bucket の場合は `autoDeleteObjects` を設定することで `cdk destroy` 時にオブジェクトを含めて削除してくれます。
 ECR の `autoDeleteImages` なども同様です。
 
 
