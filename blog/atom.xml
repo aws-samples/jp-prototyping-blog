@@ -2,11 +2,25 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://prototyping-blog.com/blog</id>
     <title>Prototyping Blog Blog</title>
-    <updated>2023-03-23T00:00:00.000Z</updated>
+    <updated>2023-03-24T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://prototyping-blog.com/blog"/>
     <subtitle>Prototyping Blog Blog</subtitle>
     <icon>https://prototyping-blog.com/img/favicon.ico</icon>
+    <entry>
+        <title type="html"><![CDATA[最新の nvidia-driver 対応の Amazon Linux 2 ベースの EKS AMI の作り方]]></title>
+        <id>amazon-eks-gpu-ami</id>
+        <link href="https://prototyping-blog.com/blog/amazon-eks-gpu-ami"/>
+        <updated>2023-03-24T00:00:00.000Z</updated>
+        <summary type="html"><![CDATA[最新の nvidia-driver (2023年3月時点)をインストールした Amazon Linux 2 ベースの EKS AMI の作り方を紹介します。]]></summary>
+        <content type="html"><![CDATA[<p>最新の nvidia-driver (2023年3月時点)をインストールした Amazon Linux 2 ベースの EKS AMI の作り方を紹介します。</p><h2 class="anchor anchorWithStickyNavbar_LWe7" id="gpu-ワークロード用-eks-ami-を自作する">GPU ワークロード用 EKS AMI を自作する<a class="hash-link" href="#gpu-ワークロード用-eks-ami-を自作する" title="見出しへの直接リンク">​</a></h2><p>GPU ワークロードに対応した <a href="https://docs.aws.amazon.com/ja_jp/eks/latest/userguide/eks-optimized-ami.html" target="_blank" rel="noopener noreferrer">Amazon EKS optimized accelerated Amazon Linux AMI</a> に含まれる <code>nvidia-driver</code> の version は2023年3月現在 <code>470.161.03</code> であり、ワークロードによってはより新しいドライバが必要になることがあります。</p><p>通常の AMI はビルドに必要なスクリプトが <a href="https://github.com/awslabs/amazon-eks-ami" target="_blank" rel="noopener noreferrer">GitHub</a> に公開されていますが、GPU ワークロード用のものは公開されていません。通常の AMI をベースに最新の <code>nvidia-driver</code> をインストールした AMI を作るサンプルを <a href="https://github.com/kudtomoy/amazon-eks-gpu-ami" target="_blank" rel="noopener noreferrer">GitHub</a> に公開しました。EKS version <code>1.24</code> と <code>1.25</code> で動作確認を行なっています。<code>nvidia-driver</code> は <code>scripts/setup_gpu.sh</code> 内で <code>cuda_12.0.1_525.85.12</code> をインストールしていますが、必要なバージョンに書き換えてご利用ください。</p><p>ビルドの手順としては Linux インスタンスへの <a href="https://docs.aws.amazon.com/ja_jp/AWSEC2/latest/UserGuide/install-nvidia-driver.html" target="_blank" rel="noopener noreferrer">NVIDIA ドライバーのインストール</a> を参考に <code>nvidia-driver</code> など必要なソフトウェアのインストールと設定を行なっています。Amazon Linux 2 の場合は通常の <code>gcc</code> ではなく <code>/usr/bin/gcc10-cc</code> を使うなど細かいポイントがあるため、一度目を通すことをおすすめします。</p>]]></content>
+        <author>
+            <name>Tomoya Kudo</name>
+            <uri>https://github.com/kudtomoy</uri>
+        </author>
+        <category label="eks" term="eks"/>
+        <category label="packer" term="packer"/>
+    </entry>
     <entry>
         <title type="html"><![CDATA[cdk destroy しても残ってしまうリソースへの対処法]]></title>
         <id>clean-cdk-resources</id>
