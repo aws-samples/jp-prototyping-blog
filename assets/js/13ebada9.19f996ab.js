@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkjp_prototyping_blog=self.webpackChunkjp_prototyping_blog||[]).push([[5355],{1855:a=>{a.exports=JSON.parse('{"label":"dynamodb","permalink":"/blog/tags/dynamodb","allTagsPath":"/blog/tags","count":1}')}}]);
