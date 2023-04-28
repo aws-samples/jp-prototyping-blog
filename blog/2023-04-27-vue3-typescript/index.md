@@ -29,7 +29,7 @@ GitHubリポジトリ：[vue3-prototype-blog](https://github.com/wadabee/vue3-pr
 
 
 ![picture 1](./application.png)  
-今回は上記のようなシンプルなアプリケーションを作成しました（フロントエンドのみの構成）。  
+本記事では、上記のようなシンプルなアプリケーションを作成しました（フロントエンドのみの構成）。  
 New Todo の Title と Content を入力して、Register ボタンを押下すると、下部の Todo List に入力した Todo が表示されます。  
 また、Delete ボタンを押下することで、当該 Todo を削除することができます。  
 この機能を、Composition API、Composition API( Emitを利用しないパターン )、Options API でそれぞれ実装しています。  
