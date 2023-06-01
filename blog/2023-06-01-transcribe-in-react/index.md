@@ -7,7 +7,7 @@ authors: [wadabee]
 
 [Amazon Transcribe](https://aws.amazon.com/jp/transcribe/) (以降、Transcribe) は、音声をテキストに変換するサービスです。  
 SDK を利用したストリーミング文字起こしを行うことで、リアルタイムに文字起こしを行うことができます。  
-React から Transcribe のストリーミング文字起こしを行う際に、Polyfill の設定が必要になるためそれを中心に解説します。  
+本記事では、React で実装された Web アプリで Transcribe のストリーミング文字起こし機能を使う際に、Polyfill の設定が必要になるためそれを中心に解説します。  
 
 <!-- truncate -->
 
@@ -20,6 +20,15 @@ Transcribe のストリーミング文字起こしは、[@aws-sdk/client-transcr
 
 また、`webpack` と `Vite` で対応方法が異なるため、それぞれで適切対応を取る必要があります。  
 `webpack` と `Vite` それぞれの、Polyfill の設定方法をご紹介します。  
+
+### Polyfill とは
+プログラムの解説に入る前に、簡単に Polyfill について解説します。  
+Polyfill とは、JavaScript の実行環境の差異を吸収するためのコードのことです。  
+
+JavaScript の実行環境（ブラウザや Node.js など）は多岐にわたるため、実行環境によってはある文法やある機能をサポートしていない場合があります。  
+Polyfill はそのサポートしていない文法や機能を実現するためのコードになります（サポートしている古い文法・機能を使って、サポートしていない新しい文法・機能を再現します）。  
+
+利用するライブラリやアプリを動かす実行環境によっては、Polyfill の設定が必要になることがあります。  
 
 ### webpack の対応方法
 サンプルコードを Polyfill の設定を行わずに実行すると、以下のようなビルドエラーが発生します。  
