@@ -5,7 +5,7 @@ tags: [ec2, cloudwatch]
 authors: [kuridaik]
 ---
 
-Amazon Linux 2023 は systemd のバージョンが 252 にアップデートされています。このバージョンでは `StandardOutput` などの出力オプションで `append` プレフィックスが利用できるため、EC2 インスタンス内で動作するアプリケーションのログを手軽に CloudWatch Logs に転送できます。
+Amazon Linux 2023 は systemd のバージョンが 252 にアップデートされています。このバージョンでは `StandardOutput` などの出力オプションで `append` プレフィックスが利用できるため、EC2 インスタンス内で動作するアプリケーションのログを手軽にファイル出力して CloudWatch Logs に転送できます。
 
 <!-- truncate -->
 
