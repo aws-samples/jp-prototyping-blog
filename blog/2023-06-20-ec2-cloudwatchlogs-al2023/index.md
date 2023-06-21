@@ -11,7 +11,7 @@ Amazon Linux 2023 は systemd のバージョンが 252 にアップデートさ
 
 1. ログの転送設定ファイルを作成します
 
-   作成先に指定はありませんが後ほど参照するため、ここでは `/home/ec2-user/logtransfer.json` とします。下記例では ログファイル `/var/log/sampleapp.log` を CloudWatch Logs の `/ec2/sampleap/{instance_id}` に書き出します。
+   作成先に指定はありませんが後ほど参照するため、ここでは `/home/ec2-user/logtransfer.json` とします。下記例では ログファイル `/var/log/sampleapp.log` を CloudWatch Logs の `/ec2/sampleapp/{instance_id}` に書き出します。
 
 ```jsonc
 {
