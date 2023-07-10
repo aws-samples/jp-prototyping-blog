@@ -2,7 +2,7 @@
 title: "5分でEC2 + Remote SSH開発環境を構築する"
 slug: ec2-proto-env
 tags: [ec2, cloudshell]
-authors: [tksuzuki]
+authors: [statefb]
 ---
 
 開発環境の構築は慣れている人にとっては手間ではないものの、開発に不慣れな人にとっては躓きがちなポイントの一つとなります。このような場合選択肢の一つとして[Cloud9 を使った方法](https://prototyping-blog.com/blog/cdk-deploy-cloudshell-cloud9)が挙げられますが、チームの方針や好みなどで[Visual Studio Code](https://code.visualstudio.com/) (以降 vscode と呼称) を利用したいケースもあるでしょう。ここでは[Remote SSH](https://code.visualstudio.com/docs/remote/ssh) 用に、プロトタイピング用途でよく利用されるソフトウェアをプリインストールした EC2 インスタンスを手軽に構築する方法について紹介します。
