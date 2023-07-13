@@ -187,16 +187,57 @@ S3 のデータソースに対して、1 つの設定ファイルを定義でき
 
 参考：[ユーザーコンテキストでのフィルタリング](https://docs.aws.amazon.com/ja_jp/kendra/latest/dg/user-context-filter.html)
 
-## 認証について
+## 認証・認可について
 
-前項で説明した通り、各種認証サービスの発行した JWT トークンを利用してアクセスコントロールを実現することが可能です。  
+前項で説明した通り、各種認証サービスの発行した JWT トークンを利用してアクセスコントロールを実現することが可能です。この機能は、Kendra 自体のアクセス制限を行うのではなく、ドキュメントの検索可否を制御するだけなのでご注意ください。
+
 今回は [Amazon Cognito](https://aws.amazon.com/jp/cognito/) (以降、Cognito) を利用した認証について解説を行います。  
 [simple-lex-kendra-jp](https://github.com/aws-samples/simple-lex-kendra-jp/) リポジトリの `SimpleKendraAuth` のスタックはここで紹介する Cognito を利用する方法で実装をしています。  
 Kendra のトークンを使ったアクセスコントロールについては、[こちらのドキュメント (Controlling access to documents in an index)](https://docs.aws.amazon.com/kendra/latest/dg/create-index-access-control.html) をご覧ください。
 
-### Kendra の Index の設定
+### Kendra の JWT トークン設定の要否
 
-アクセス制限を行う際は、Kendra の Index に対して設定を行う必要があります。
+前項でも説明した通り、JWT トークンを利用しても Kendra 自体のアクセス制限を行うことはできません。すべてのファイルに `AccessControlList` を設定していれば、未認証ユーザが検索してもドキュメントは 1 件もヒットしませんが、Kendra への Query 発行はできます。
+
+未認証ユーザの Kendra へのアクセス自体を制限したい場合は、[API Gateway の Cognito オーソライザー](https://docs.aws.amazon.com/ja_jp/apigateway/latest/developerguide/apigateway-integrate-with-cognito.html)等を利用して Query を発行する前に、アクセスをブロックする仕組みにする必要があります。[simple-lex-kendra-jp](https://github.com/aws-samples/simple-lex-kendra-jp/) の「Amazon Kendra Auth プロジェクト」に、こちらの実装サンプルがあるので合わせてご確認ください。
+
+#### パターン別の対応方法
+
+構築するシステムの要件によって、さまざまな Kendra の設定パターンがありますので、よくあるパターン別に対応方法をご紹介します。  
+**こちらは、IAM や [VPC](https://docs.aws.amazon.com/ja_jp/kendra/latest/dg/vpc-interface-endpoints.html) の設定が正しくできており、 Kendra へ直接 Query が発行できない状態になっていることを前提としています。**  
+**注意：Kendra のアクセスコントロールでは、 S3 バケット自体のアクセス制限はできません。S3 バケットの権限設定は適切に行ってください。**
+
+- 認証ユーザのみ Kendra のアクセスを許可したい
+  - 共通
+    - API Gateway 等で未認証ユーザをブロックしてください。
+  - JWT トークンの情報でドキュメントのアクセスコントロールを実施したい
+    - Index に JWT トークンの設定し、Query 発行時に JWT トークンをセットしてください。
+  - Kendra 独自のユーザ・グループの定義でドキュメントのアクセスコントロールを実施したい
+    - Index に JWT トークンの設定は不要です。
+    - Query 発行時に、ユーザ ID・グループ ID または、DataSourceGroup をセットしてください。
+      - JWT トークンのペイロードの情報を元に、ユーザ ID・グループ ID または、DataSourceGroup をセットする方法も考えられます。
+      - APIGateway + Lambda の構成だと、認証に利用した JWT トークンのペイロードを簡単に取得できます (`event.requestContext.authorizer` でペイロードが取得できます [[参考]](https://docs.aws.amazon.com/ja_jp/apigateway/latest/developerguide/http-api-jwt-authorizer.html))。
+  - ドキュメントのアクセスコントロールを実施しない
+    - Index に JWT トークンの設定は不要です。
+    - ドキュメントに `AccessControlList` を設定しないでください。
+    - Query 発行時にユーザコンテキストとユーザ属性フィルタリングの設定をしないでください。
+- 未認証ユーザも Kendra のアクセスを許可したい
+  - ドキュメントのアクセスコントロールを実施したい
+    - 未認証ユーザに公開したくないドキュメント**すべて**に `AccessControlList` を設定してください。
+    - 非公開ドキュメントを参照できるユーザは認証を必須としてください。
+      - 対応方法は「認証ユーザのみ Kendra のアクセスを許可したい」と同様です。
+    - `AccessControlList` が設定されていないドキュメントは、未認証ユーザでもアクセス可能となります。
+      - 未認証ユーザの場合は、Query 発行時にユーザコンテキストとユーザ属性フィルタリングの設定をしないでください。
+  - ドキュメントのアクセスコントロールを実施しない
+    - Index に JWT トークンの設定は不要です。
+    - ドキュメントに `AccessControlList` を設定しないでください。
+    - Query 発行時にユーザコンテキストとユーザ属性フィルタリングの設定をしないでください。
+
+### Kendra の JWT トークンの設定方法
+
+#### Index の設定
+
+JWT トークンを利用したアクセス制限を行う際は、Kendra の Index に対して設定を行う必要があります。
 
 Index 設定画面の「Configure user access control (ユーザアクセスコントロールの設定)」の中に「Token configuration（トークン設定）」という項目があり、そこで設定を行うことができます。  
 Coginito を利用する場合は、「Token Type」で「OpenID」を選択してください。  
@@ -209,30 +250,19 @@ https://cognito-idp.<Region>.amazonaws.com/<userPoolId>/.well-known/jwks.json
 #### ユーザ名とグループ名について
 
 Kendra では、ユーザ名とグループ名でアクセスコントロールを行うことができますが、JWT トークンのペイロードの中のどの項目でアクセスコントロールを行うかを設定できます。  
-例えば、「Username」に `email` を設定すればメールアドレスでアクセスコントロールが可能ですし、それ以外のカスタム属性を指定することも可能です。  
+たとえば、「Username」に `email` を設定すればメールアドレスでアクセスコントロールが可能ですし、それ以外のカスタム属性を指定することも可能です。  
 「Groups」に `cognito:groups` を設定することで、Cognito ユーザグループでアクセスコントロールを行うことが可能です。  
 参考：[ユーザプール属性](https://docs.aws.amazon.com/ja_jp/cognito/latest/developerguide/user-pool-settings-attributes.html)  
 参考：[ユーザプルにグループを追加する](https://docs.aws.amazon.com/ja_jp/cognito/latest/developerguide/cognito-user-pools-user-groups.html)  
 参考：[ID トークンのペイロード](https://docs.aws.amazon.com/ja_jp/cognito/latest/developerguide/amazon-cognito-user-pools-using-the-id-token.html)
 
-### Kendra の Query 実行
+#### Kendra の Query 実行
 
-Kendra では検索を行う際に Query を実行しますが、Query を実行する際に JWT トークンを設定することでアクセスコントロールを行うことができます。  
-Query のオプションである `--user-context` に `Token` という項目があるので、そちらに Cognito から発行された JWT トークンを設定してください。  
+Query のオプションである `--user-context` に `Token` という項目があるので、そちらに Cognito から発行された JWT トークンを設定してください。JWT トークンの検証および、ドキュメントのアクセスコントロールが実施されます。  
 参考：[AWS CLI Referense kendra qurey](https://awscli.amazonaws.com/v2/documentation/api/latest/reference/kendra/query.html)
 
 Cognito には、アクセストークンと ID トークンの 2 種類の JWT トークンがあります。  
 Kendra の Query では、どちらのトークンも利用することが可能ですが、認証されたユーザの属性（アイデンティティ）を利用することが主な目的ですので、ID トークンを利用する方が適切です。
-
-### ゲストユーザの取り扱い
-
-Kendra のユースケースにおいて、「機密情報や個人情報にアクセス可能なユーザ」と「認証不要でライトに使いたいユーザ」を同一アプリで運用したい場合があるかもしれません。
-
-前項で解説した Query の `Token` を設定せずに実行した場合は、アクセスコントロールが未設定のファイルだけ参照可能になります。  
-機密情報や個人情報には「アクセスコントロールを設定する」、それ以外は「アクセスコントロールを設定しない」という設定にすれば、ゲストユーザを含む環境でも安全に運用可能です。  
-**注意：Kendra のアクセスコントロールでは、 S3 バケット自体のアクセス制限はできません。S3 バケットの権限設定は適切に行ってください。**
-
-ゲストユーザが不要（利用者全員が認証必須）な場合は、[API Gateway の Cognito オーソライザー](https://docs.aws.amazon.com/ja_jp/apigateway/latest/developerguide/apigateway-integrate-with-cognito.html)等を利用して、API 自体の利用を制限する方がより安全です。
 
 ## さいごに
 
