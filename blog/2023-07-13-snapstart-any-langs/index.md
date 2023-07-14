@@ -43,6 +43,10 @@ Java 11 以外のランタイムを選択すると、そもそも SnapStart を�
 
 これは現状わかっている範囲で、1 択です。[Lambda Web Adapter](https://github.com/awslabs/aws-lambda-web-adapter) を利用します。Lambda Web Adapter を利用すれば、Lambda 関数の invoke を、通常の HTTP リクエストとして受けることができます。つまり、慣れ親しんだ Web フレームワークが利用できます。
 
+### サンプル
+
+- Lambda Web Adapter のリポジトリの examples に、`deno compile` を利用して SnapStart を有効化しているサンプルがあります。([こちら](https://github.com/awslabs/aws-lambda-web-adapter/tree/main/examples/deno-zip))
+
 ## まとめ
 
 この記事では Lambda SnapStart を Java 11 以外の言語で有効化する手順について説明しました。3 度目になりますが、**AWS 公式で案内している手順ではありません。これらの手順に関して、AWS からはいかなるサポートも受けることができません。また、本番環境での利用は絶対にしないでください。**
