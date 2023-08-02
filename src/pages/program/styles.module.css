@@ -1,0 +1,70 @@
+.hero {
+    background: linear-gradient(227deg, #330066, #7c5aed, #df2a5d, #005276);
+    background-size: 800% 800%;
+    color: white;
+    animation: GradientBlend 31s ease infinite;
+}
+
+.imageContainer {
+    text-align: center;
+}
+
+.hero .imageContainer {
+    text-align: right;
+}
+
+@media (min-width: 992px) {
+    .hero .title {
+        font-size: 3em;
+    }
+
+    .hero .description {
+        font-size: 1.5em;
+        max-width: 620px;
+    }
+
+    .hero .logo {
+        height: 250px;
+        display: inline-block;
+    }
+}
+
+@media (max-width: 991px) {
+    .hero .title {
+        font-size: 2.5em;
+    }
+
+    .hero .description {
+        font-size: 1.3em;
+    }
+
+    .hero .logo {
+        display: none;
+    }
+}
+
+.cardImage {
+    max-height: 150px;
+}
+
+.fullWidth {
+    max-width: 100% !important;
+}
+
+.bgGray {
+    background-color: #f1f4f6;
+}
+
+@keyframes GradientBlend {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
