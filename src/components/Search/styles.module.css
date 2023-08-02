@@ -3,11 +3,13 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    margin-bottom: 5em;
-    margin-top: 5em;
+    padding: 5em 0em;
+    background-image: url('./cloud.jpg');
+    background-size: cover;
 }
 
 .title {
+    color: #ffffff;
     margin-bottom: .5em;
 }
 
@@ -21,14 +23,16 @@
 
 .tag {
     font-weight: bold;
-    background-color: #5882f7;
-    color: white;
-    padding: .2em .6em;
-    border-radius: .8em;
+    background-color: #ffffff;
+    color: #0972d3;
+    padding: .5em 2em;
+    border: 2px solid #0972d3;
+    border-radius: 40px;
     margin: 0 .2em;
 }
 
 .tag:hover {
     text-decoration: none;
-    color: white;
+    color: #033160;
+    border-color: #033160;
 }
