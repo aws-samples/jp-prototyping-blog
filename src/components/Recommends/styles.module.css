@@ -3,7 +3,8 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    margin-top: 6em;
+    padding: 5em 0em;
+    background-color: #f1f4f6;
 }
 
 .title {

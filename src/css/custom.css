@@ -6,27 +6,33 @@
 
 /* You can override the default Infima variables here. */
 :root {
-    --ifm-color-primary: #2e8555;
-    --ifm-color-primary-dark: #29784c;
-    --ifm-color-primary-darker: #277148;
-    --ifm-color-primary-darkest: #205d3b;
-    --ifm-color-primary-light: #33925d;
-    --ifm-color-primary-lighter: #359962;
-    --ifm-color-primary-lightest: #3cad6e;
-    --ifm-code-font-size: 95%;
+    --ifm-color-primary: #232f3e;
+    --ifm-color-primary-dark: #202a38;
+    --ifm-color-primary-darker: #1e2835;
+    --ifm-color-primary-darkest: #18212b;
+    --ifm-color-primary-light: #273444;
+    --ifm-color-primary-lighter: #283647;
+    --ifm-color-primary-lightest: #2e3d51;
+    --ifm-color-secondary: #ff9900;
+    --ifm-color-secondary-dark: #ec7211;
+    --ifm-font-family-base: 'ヒラギノ角ゴ Pro W3,Hiragino Kaku Gothic Pro,Osaka,メイリオ,Meiryo,ＭＳ Ｐゴシック,MS PGothic,sans-serif';
+    --ifm-font-size-base: 15px;
+    --ifm-code-font-size: 13px;
+    --ifm-link-color: #0972d3;
+    --ifm-navbar-color: #ffffff;
+    --ifm-navbar-background-color: var(--ifm-color-primary);
+    --ifm-navbar-link-color: #ffffff;
+    --ifm-navbar-link-hover-color: #ff9900;
+    --ifm-menu-color: #ffffff;
+    --ifm-footer-background-color: #232f3e;
+    --ifm-footer-link-color: #ffffff;
+    --ifm-footer-link-hover-color: #ff9900;
+    --ifm-footer-color: #ffffff;
     --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
 }
 
-/* For readability concerns, you should choose a lighter palette in dark mode. */
-[data-theme='dark'] {
-    --ifm-color-primary: #5882f7;
-    --ifm-color-primary-dark: #21af90;
-    --ifm-color-primary-darker: #1fa588;
-    --ifm-color-primary-darkest: #1a8870;
-    --ifm-color-primary-light: #29d5b0;
-    --ifm-color-primary-lighter: #32d8b4;
-    --ifm-color-primary-lightest: #4fddbf;
-    --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+.navbar {
+    color: white;
 }
 
 .hero__title {
@@ -35,4 +41,8 @@
 
 .hero__subtitle {
     color: white;
+}
+
+.table-of-contents__link:hover {
+    color: var(--ifm-link-hover-color)
 }

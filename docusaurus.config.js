@@ -55,7 +55,7 @@ const config = {
   /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
   themeConfig: {
     colorMode: {
-      defaultMode: 'dark',
+      defaultMode: 'light',
       disableSwitch: true,
       respectPrefersColorScheme: false,
     },
@@ -78,9 +78,9 @@ const config = {
           label: 'Blog',
         },
         {
-          to: '/about-team',
+          to: '/program',
           position: 'left',
-          label: 'Team',
+          label: 'Prototyping Program',
         },
         {
           href: 'https://github.com/aws-samples/jp-prototyping-blog',
@@ -90,7 +90,7 @@ const config = {
       ],
     },
     footer: {
-      style: 'dark',
+      style: 'light',
       links: [
         {
           title: 'Contents',
@@ -100,8 +100,8 @@ const config = {
               to: '/blog',
             },
             {
-              label: 'About Team',
-              to: '/about-team',
+              label: 'Prototyping Program',
+              to: '/program',
             },
           ],
         },
