@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkjp_prototyping_blog=self.webpackChunkjp_prototyping_blog||[]).push([[2121],{7987:l=>{l.exports=JSON.parse('{"label":"closed","permalink":"/blog/tags/closed","allTagsPath":"/blog/tags","count":1}')}}]);

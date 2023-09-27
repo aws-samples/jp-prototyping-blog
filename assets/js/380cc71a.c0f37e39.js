@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkjp_prototyping_blog=self.webpackChunkjp_prototyping_blog||[]).push([[1668],{8426:l=>{l.exports=JSON.parse('{"label":"codebuild","permalink":"/blog/tags/codebuild","allTagsPath":"/blog/tags","count":1}')}}]);

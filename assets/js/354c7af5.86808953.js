@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkjp_prototyping_blog=self.webpackChunkjp_prototyping_blog||[]).push([[775],{7698:o=>{o.exports=JSON.parse('{"label":"cognito","permalink":"/blog/tags/cognito","allTagsPath":"/blog/tags","count":1}')}}]);

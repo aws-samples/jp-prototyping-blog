@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkjp_prototyping_blog=self.webpackChunkjp_prototyping_blog||[]).push([[6407],{5282:l=>{l.exports=JSON.parse('{"label":"jekyll","permalink":"/blog/tags/jekyll","allTagsPath":"/blog/tags","count":1}')}}]);

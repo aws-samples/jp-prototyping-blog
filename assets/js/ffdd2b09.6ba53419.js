@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkjp_prototyping_blog=self.webpackChunkjp_prototyping_blog||[]).push([[9198],{8189:l=>{l.exports=JSON.parse('{"label":"healthomics","permalink":"/blog/tags/healthomics","allTagsPath":"/blog/tags","count":1}')}}]);

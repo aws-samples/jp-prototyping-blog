@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_aws_samples_jp_prototyping_blog=self.webpackChunk_aws_samples_jp_prototyping_blog||[]).push([[8053],{942:s=>{s.exports=JSON.parse('{"label":"genomics","permalink":"/blog/tags/genomics","allTagsPath":"/blog/tags","count":1}')}}]);

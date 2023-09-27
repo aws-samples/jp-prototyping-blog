@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_aws_samples_jp_prototyping_blog=self.webpackChunk_aws_samples_jp_prototyping_blog||[]).push([[3950],{8680:s=>{s.exports=JSON.parse('{"label":"discord","permalink":"/blog/tags/discord","allTagsPath":"/blog/tags","count":1}')}}]);
