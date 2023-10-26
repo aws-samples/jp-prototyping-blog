@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_aws_samples_jp_prototyping_blog=self.webpackChunk_aws_samples_jp_prototyping_blog||[]).push([[9198],{8189:s=>{s.exports=JSON.parse('{"label":"healthomics","permalink":"/blog/tags/healthomics","allTagsPath":"/blog/tags","count":2}')}}]);
