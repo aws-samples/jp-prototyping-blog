@@ -81,7 +81,7 @@ AWS HealthOmics Analysis App は [AWS Cloud Development Kit (CDK)](https://aws.a
 
 1. AWS HealthOmics Analysis App にサインインしたら「New Analysis」をクリックします。
 2. 次の画面で「Workflow」をクリックすると Ready2Run ワークフローの一覧が表示されるので、「AlphaFold for up to 600 residues」を選択します。
-3. 「Analysis Name」に任意の名前を入力して「CONTINUE」をクリックします。(「Visualization」は今回は指定しません)
+3. 「Analysis Name」に任意の名前を入力して「CONTINUE」をクリックします。(「Visualizer」は今回は指定しません)
 
 ![New Analysis](new_analysis_settings.png)
 
@@ -177,4 +177,4 @@ Step Functions ステートマシンでは、以下のようなステップで�
 
 今回は、AWS HealthOmics のご紹介と、このサービスを AWS Step Functions と組み合わせたサンプルアプリである AWS HealthOmics Analysis App の解説を行いました。これらのサービスを活用することで、スケーラブルなオミクスデータ分析ワークフローを AWS 上に手軽に構築する事が可能となります。
 
-次回以降では、分析結果の二次解析や可視化、AWS HealthOmics でのプライベートワークフローの実行などについて詳しく解説する予定です。
+次の記事: [AWS HealthOmics で AlphaFold を実行し、タンパク質の立体構造を可視化する](https://prototyping-blog.com/blog/aws-healthomics-analysis-app-alphafold/)
