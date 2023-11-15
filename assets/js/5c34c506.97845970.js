@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_aws_samples_jp_prototyping_blog=self.webpackChunk_aws_samples_jp_prototyping_blog||[]).push([[1844],{7217:p=>{p.exports=JSON.parse('{"label":"prompt engineering","permalink":"/blog/tags/prompt-engineering","allTagsPath":"/blog/tags","count":1}')}}]);
