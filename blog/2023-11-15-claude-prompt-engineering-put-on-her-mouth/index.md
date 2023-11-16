@@ -18,7 +18,7 @@ Amazon Bedrock上のClaudeをサービスに組み込む場合、安定してJSO
 Human: 挨拶の文章を考えてください。回答は以下のJSONで返してください。
 <example>
 { "greeting": "こんにちは" }
-</example>`;
+</example>
 
 Assistant: {
 ```
@@ -52,3 +52,6 @@ Assistant側の回答もプロンプトに含められる、Claudeならでは�
 
 ## まとめ
 ClaudeでJSON出力を安定化させる一つのコツを紹介しました。この小技を使って、Claudeの能力を最大限に引き出しましょう!
+
+P.S. Claude特有のテクニックはこちらの公式ドキュメントにもまとまっています: [Anthropic の迅速なエンジニアリング リソースのガイド
+](https://docs.anthropic.com/claude/docs/guide-to-anthropics-prompt-engineering-resources)。特に[スライド](https://docs.google.com/presentation/d/1tjvAebcEyR8la3EmVwvjC7PHR8gfSrcsGKfTPAaManw/edit#slide=id.g297e9aa6f0f_0_1222)は要確認です！
