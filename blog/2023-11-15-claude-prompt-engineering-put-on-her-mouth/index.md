@@ -18,7 +18,7 @@ Amazon Bedrock上のClaudeをサービスに組み込む場合、安定してJSO
 Human: 挨拶の文章を考えてください。回答は以下のJSONで返してください。
 <example>
 { "greeting": "こんにちは" }
-</example>`;
+</example>
 
 Assistant: {
 ```
