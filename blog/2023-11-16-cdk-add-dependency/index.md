@@ -14,9 +14,9 @@ CDKに `addDependency` メソッドが2種類あることをご存知でした�
 ## addDependency とは
 `addDependency` メソッドは、コンストラクト間の依存関係を明示的に指定するための機能です。AWS CDKにおいては、最終的にCloudFormationリソースの依存関係として扱われます。
 
-これにより、CFnリソースの作成・更新・削除の順番を制御することが可能になります。詳細はこちらのドキュメントもご覧ください: [DependsOn 属性](https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/aws-attribute-dependson.html)
+これにより、CFnリソースの作成・更新・削除の順序を制御できるようになります。詳細はこちらのドキュメントもご覧ください: [DependsOn 属性](https://docs.aws.amazon.com/ja_jp/AWSCloudFormation/latest/UserGuide/aws-attribute-dependson.html)
 
-ちなみに若干非自明なのですが、 `A.addDependency(B)` で、AがBに依存していることを意味します。つまり、Bが作成されたあとにAが作成され、またAが削除されたあとにBが削除されるなどの順番になります。
+ちなみにやや非自明なのですが、 `A.addDependency(B)` で、AがBに依存していることを意味します。つまり、Bが作成されたあとにAが作成され、またAが削除されたあとにBが削除されるなどの順番になります。
 
 ## 2種類の addDependency
 
@@ -66,13 +66,13 @@ bucket1Resource.addDependency(bucket2Resource);
 ## で、何が違うの？
 2つの違いを一言で表すなら、 **N対Nの依存関係か、1対1の依存関係か** と言えます。詳しく見ていきましょう。
 
-`Node.addDependency(deps)` の場合は、そのノード (コンストラクト) の子(孫、ひ孫…)ノードに対して、再帰的に依存関係が追加されます。また、追加先のdepsについても、再帰的に処理されます。つまり、一回の操作でN対Nの依存関係を設定できます。
+`Node.addDependency(deps)` の場合は、そのノード (コンストラクト) の子(孫、ひ孫…)ノードに対して、再帰的に依存関係が追加されます。また、追加先のdepsについても、再帰的に処理されます。つまり、一度の操作でN対Nの依存関係を設定できます。
 
 図解するとこのようです:
 
 ![Node.addDependencyの場合のコンストラクトツリー図解](nodeadd.png)
 
-一方 `CfnResource.addDependency` の場合は、呼び出し元と引数の2つのL1コンストラクトのみに作用します。つまり、一回の操作で1対1の依存関係を設定できます。
+一方 `CfnResource.addDependency` の場合は、呼び出し元と引数の2つのL1コンストラクトのみに作用します。つまり、一度の操作で1対1の依存関係を設定できます。
 
 ![CfnResource.addDependencyの場合のコンストラクトツリー図解](cfnadd.png)
 
