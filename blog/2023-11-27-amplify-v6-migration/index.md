@@ -15,9 +15,17 @@ authors: [coyanagiaws]
 
 今回マイグレーションを行ったアプリケーションは React で実装した Single-page Application で、`Amplify Libraries` と `Amplify UI Components` を利用しています。ライブラリの利用用途は主に Cognito との連携と AWS_IAM オーサライザーを設定した API Gateway との連携です。このアプリケーションで利用する Cognito や API Gateway は Amplify CLI を使わず手動でデプロイしているため、フロントエンドのコード内で `Amplify.configure()` を呼んで Cognito インスタンスのユーザープール ID や API エンドポイントをセットしています。これにより、Amplify のライブラリと Cognito や API が連携できるようになります。
 
+## マイグレーションの手順
+
+マイグレーションは下記の手順で実施しました。
+
+- `Amplify Libraries` と `Amplify UI Components` ライブラリのアップデート
+- `Amplify Libraries` のアップデートで発生した TS エラーに対応
+- `Amplify UI Components` のアップデートで発生したスタイル崩れに対応
+
 ## Amplify ライブラリのアップデート
 
-早速アプリケーションに対し、`npm-check-updates` を使ってアップデート可能なライブラリを確認します。下記の通り `aws-amplify` は v5.3.3、`@aws-amplify/ui-react` は v.5.0.4 を利用しています。今回はそれぞれ v6.0.5 と v6.0.3 にアップデートします。
+アプリケーションに対し、`npm-check-updates` を使ってアップデート可能なライブラリを確認します。下記の通り `aws-amplify` は v5.3.3、`@aws-amplify/ui-react` は v.5.0.4 を利用しています。今回はそれぞれ v6.0.5 と v6.0.3 にアップデートします。
 
 ```bash
 % npx npm-check-updates
@@ -275,7 +283,14 @@ v6
 
 ## おわりに
 
-本記事では Amplify ライブラリのアップデートに伴う具体的な修正を列挙しました。Amplify ライブラリのアップデートを行う際の参考となれば幸いです。また、PubSub 実装など今回説明していない部分で Amplify ライブラリを利用している場合は、下記のマイグレーションのページを参考にしてください。
+本記事では Amplify ライブラリのアップデートに伴い以下のコードの修正を行いました。
+
+- Amplify.configure に渡すデータの形式を v6 の形式に合わせて修正
+- API Gateway(REST) を呼び出すコードを `aws-amplify` モジュールの `API` から `aws-amplify/api` モジュールの `get` に変更
+- ユーザーの attributes の取得方法の変更
+- Amplify UI コンポーネントのクラス名とカラートークン名のアップデートを元にスタイル定義を修正
+
+Amplify ライブラリのアップデートを行う際の参考となれば幸いです。また、PubSub 実装など今回説明していない部分で Amplify ライブラリを利用している場合は、下記のマイグレーションのページを参考にしてください。
 
 - Amplify Libraries - Migrate from Amplify JavaScript v5 to v6
 
