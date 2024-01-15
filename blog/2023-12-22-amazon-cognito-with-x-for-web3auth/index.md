@@ -69,6 +69,7 @@ Amazon Cognitoの画面からユーザーがログインもしくは新規アカ
 OAuth2.0の処理フローについては、[OAuth 2.0 全フローの図解と動画](https://qiita.com/TakahikoKawasaki/items/200951e5b5929f840a1f) が参考になります。
 
 API GatewayとLambdaでは次のようなAPIを実装しています。
+
 |API|用途|
 |---|---|
 |GET /v2/authorize| Xとの連携を許可する画面をユーザーに表示する|
@@ -101,7 +102,7 @@ Cognito, API Gateway, Lambdaがそれぞれがどのような処理を行うの�
 
 
 これらの処理を行うAPI GatewayとLambdaを実装し、Cognitoのアイデンティティプロバイダーとして設定することで、X(旧Twitter)でログインしたアカウントの情報を利用して、Web3のWalletを使用することができるようになります。
-具体的な環境構築の方法や、Web3Authの設定は [環境構築手順書](https://github.com/aws-samples/amazon-cognito-with-x-for-web3auth/blob/main/docs/jp/%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89.md) や Web3Authのドキュメントの(Using AWS Cognito with Web3Auth)[https://web3auth.io/docs/content-hub/guides/cognito] を参照してください
+具体的な環境構築の方法や、Web3Authの設定は [環境構築手順書](https://github.com/aws-samples/amazon-cognito-with-x-for-web3auth/blob/main/docs/jp/%E7%92%B0%E5%A2%83%E6%A7%8B%E7%AF%89.md) や Web3Authのドキュメントの[Using AWS Cognito with Web3Auth](https://web3auth.io/docs/content-hub/guides/cognito) を参照してください
 
 
 ## 最後に
