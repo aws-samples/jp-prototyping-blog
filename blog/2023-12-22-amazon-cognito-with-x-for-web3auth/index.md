@@ -69,6 +69,7 @@ Amazon Cognitoの画面からユーザーがログインもしくは新規アカ
 OAuth2.0の処理フローについては、[OAuth 2.0 全フローの図解と動画](https://qiita.com/TakahikoKawasaki/items/200951e5b5929f840a1f) が参考になります。
 
 API GatewayとLambdaでは次のようなAPIを実装しています。
+
 |API|用途|
 |---|---|
 |GET /v2/authorize| Xとの連携を許可する画面をユーザーに表示する|
