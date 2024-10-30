@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_aws_samples_jp_prototyping_blog=self.webpackChunk_aws_samples_jp_prototyping_blog||[]).push([[9049],{8728:s=>{s.exports=JSON.parse('{"label":"cdk","permalink":"/blog/tags/cdk","allTagsPath":"/blog/tags","count":9}')}}]);

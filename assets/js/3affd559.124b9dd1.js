@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunk_aws_samples_jp_prototyping_blog=self.webpackChunk_aws_samples_jp_prototyping_blog||[]).push([[1934],{6674:s=>{s.exports=JSON.parse('{"label":"redshift","permalink":"/blog/tags/redshift","allTagsPath":"/blog/tags","count":1}')}}]);

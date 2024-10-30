@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunk_aws_samples_jp_prototyping_blog=self.webpackChunk_aws_samples_jp_prototyping_blog||[]).push([[5712],{9763:s=>{s.exports=JSON.parse('{"permalink":"/blog/tags/rum","page":1,"postsPerPage":10,"totalPages":1,"totalCount":2,"blogDescription":"Blog","blogTitle":"Blog"}')}}]);

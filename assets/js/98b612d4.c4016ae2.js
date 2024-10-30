@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunk_aws_samples_jp_prototyping_blog=self.webpackChunk_aws_samples_jp_prototyping_blog||[]).push([[6207],{6183:s=>{s.exports=JSON.parse('{"label":"kinesis data streams","permalink":"/blog/tags/kinesis-data-streams","allTagsPath":"/blog/tags","count":1}')}}]);

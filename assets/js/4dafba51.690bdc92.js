@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_aws_samples_jp_prototyping_blog=self.webpackChunk_aws_samples_jp_prototyping_blog||[]).push([[4343],{7989:a=>{a.exports=JSON.parse('{"label":"aurora","permalink":"/blog/tags/aurora","allTagsPath":"/blog/tags","count":1}')}}]);

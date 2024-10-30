@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_aws_samples_jp_prototyping_blog=self.webpackChunk_aws_samples_jp_prototyping_blog||[]).push([[3694],{9107:s=>{s.exports=JSON.parse('{"label":"fluentd","permalink":"/blog/tags/fluentd","allTagsPath":"/blog/tags","count":1}')}}]);

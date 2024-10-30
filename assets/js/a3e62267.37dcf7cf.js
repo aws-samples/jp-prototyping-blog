@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunk_aws_samples_jp_prototyping_blog=self.webpackChunk_aws_samples_jp_prototyping_blog||[]).push([[5982],{7847:a=>{a.exports=JSON.parse('{"label":"web3auth","permalink":"/blog/tags/web-3-auth","allTagsPath":"/blog/tags","count":1}')}}]);

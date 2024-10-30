@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunk_aws_samples_jp_prototyping_blog=self.webpackChunk_aws_samples_jp_prototyping_blog||[]).push([[8438],{3020:a=>{a.exports=JSON.parse('{"label":"alphafold","permalink":"/blog/tags/alphafold","allTagsPath":"/blog/tags","count":1}')}}]);

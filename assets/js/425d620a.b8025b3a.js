@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_aws_samples_jp_prototyping_blog=self.webpackChunk_aws_samples_jp_prototyping_blog||[]).push([[2887],{3491:a=>{a.exports=JSON.parse('{"label":"mac","permalink":"/blog/tags/mac","allTagsPath":"/blog/tags","count":1}')}}]);

@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_aws_samples_jp_prototyping_blog=self.webpackChunk_aws_samples_jp_prototyping_blog||[]).push([[3187],{9620:e=>{e.exports=JSON.parse('{"label":"ethereum","permalink":"/blog/tags/ethereum","allTagsPath":"/blog/tags","count":1}')}}]);

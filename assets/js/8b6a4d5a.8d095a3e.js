@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_aws_samples_jp_prototyping_blog=self.webpackChunk_aws_samples_jp_prototyping_blog||[]).push([[5792],{6120:a=>{a.exports=JSON.parse('{"label":"cloudwatch","permalink":"/blog/tags/cloudwatch","allTagsPath":"/blog/tags","count":3}')}}]);
